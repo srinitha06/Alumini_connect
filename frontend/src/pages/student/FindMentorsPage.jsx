@@ -1,4 +1,4 @@
-﻿// ============================================================
+// ============================================================
 // FIND MENTORS PAGE — AI-powered mentor search & recommendation
 // ============================================================
 
@@ -7,11 +7,11 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/context/AuthContext";
 import { getTopMentors } from "@/utils/aiRecommendation";
 import {
-import API_BASE_URL from "@/config";
   Zap, Search, MessageSquare, CheckCircle, Clock,
   MapPin, Briefcase, Send, X, Award, Users, Loader2, Building2,
   Sparkles, Rocket
 } from "lucide-react";
+import API_BASE_URL from "@/config";
 
 const FindMentorsPage = () => {
   const { user } = useAuth();
