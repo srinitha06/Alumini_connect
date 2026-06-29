@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,6 +9,7 @@ import { Briefcase, Building2, MapPin, DollarSign, Clock, Send } from "lucide-re
 import { useToast } from "@/components/ui/use-toast";
 
 import { useAuth } from "@/context/AuthContext";
+import API_BASE_URL from "@/config";
 
 const PostJobPage = () => {
   const { user } = useAuth();
@@ -33,7 +34,7 @@ const PostJobPage = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/api/jobs", {
+      const response = await fetch("${API_BASE_URL}/api/jobs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 // ALUMNI DASHBOARD
 // ============================================================
 
@@ -8,6 +8,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/context/AuthContext";
 import { MessageSquare, Briefcase, CheckCircle, Clock, XCircle, AlertTriangle, ArrowRight, User, Star, Loader2, Calendar } from "lucide-react";
 import ChatModal from "@/components/ChatModal";
+import API_BASE_URL from "@/config";
 
 const AlumniDashboard = () => {
   const { user } = useAuth();
@@ -18,7 +19,7 @@ const AlumniDashboard = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/mentorships/incoming-requests", {
+        const response = await fetch("${API_BASE_URL}/api/mentorships/incoming-requests", {
           headers: { Authorization: `Bearer ${user.token}` }
         });
         const data = await response.json();

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ import { MessageSquare, User, Calendar, CheckCircle, XCircle, Clock, Filter, Sea
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import ChatModal from "@/components/ChatModal";
+import API_BASE_URL from "@/config";
 
 const MentorshipRequestsPage = () => {
     const { user } = useAuth();
@@ -20,7 +21,7 @@ const MentorshipRequestsPage = () => {
 
     const fetchRequests = async () => {
         try {
-            const response = await fetch("http://localhost:5000/api/mentorships/incoming-requests", {
+            const response = await fetch("${API_BASE_URL}/api/mentorships/incoming-requests", {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await response.json();
@@ -40,7 +41,7 @@ const MentorshipRequestsPage = () => {
 
     const handleStatusChange = async (id, newStatus) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/mentorships/respond/${id}`, {
+            const response = await fetch(`${API_BASE_URL}/api/mentorships/respond/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

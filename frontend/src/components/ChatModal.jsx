@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { X, Send, Loader2, User } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import API_BASE_URL from "@/config";
 
 const ChatModal = ({ isOpen, onClose, mentorshipId, otherUser }) => {
     const { user } = useAuth();
@@ -12,7 +13,7 @@ const ChatModal = ({ isOpen, onClose, mentorshipId, otherUser }) => {
 
     const fetchMessages = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/messages/${mentorshipId}`, {
+            const response = await fetch(`${API_BASE_URL}/api/messages/${mentorshipId}`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await response.json();
@@ -45,7 +46,7 @@ const ChatModal = ({ isOpen, onClose, mentorshipId, otherUser }) => {
 
         setSending(true);
         try {
-            const response = await fetch("http://localhost:5000/api/messages/send", {
+            const response = await fetch(`${API_BASE_URL}/api/messages/send`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

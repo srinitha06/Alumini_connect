@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+﻿import React, { useMemo, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/context/AuthContext";
@@ -8,6 +8,7 @@ import {
   ArrowRight, Zap, CheckCircle, Clock, XCircle, MapPin, Award, Loader2, Sparkles, User, Calendar
 } from "lucide-react";
 import ChatModal from "@/components/ChatModal";
+import API_BASE_URL from "@/config";
 
 const StudentDashboard = () => {
   const { user } = useAuth();
@@ -22,10 +23,10 @@ const StudentDashboard = () => {
     const fetchData = async () => {
       try {
         const [alumniRes, requestsRes, jobsRes, statsRes] = await Promise.all([
-          fetch("http://localhost:5000/api/users/alumni", { headers: { Authorization: `Bearer ${user.token}` } }),
-          fetch("http://localhost:5000/api/mentorships/my-requests", { headers: { Authorization: `Bearer ${user.token}` } }),
-          fetch("http://localhost:5000/api/jobs", { headers: { Authorization: `Bearer ${user.token}` } }),
-          fetch("http://localhost:5000/api/stats", { headers: { Authorization: `Bearer ${user.token}` } })
+          fetch("${API_BASE_URL}/api/users/alumni", { headers: { Authorization: `Bearer ${user.token}` } }),
+          fetch("${API_BASE_URL}/api/mentorships/my-requests", { headers: { Authorization: `Bearer ${user.token}` } }),
+          fetch("${API_BASE_URL}/api/jobs", { headers: { Authorization: `Bearer ${user.token}` } }),
+          fetch("${API_BASE_URL}/api/stats", { headers: { Authorization: `Bearer ${user.token}` } })
         ]);
 
         if (alumniRes.ok) setAlumniList(await alumniRes.json());

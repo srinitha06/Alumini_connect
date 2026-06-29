@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 // JOBS PAGE — Job listings posted by alumni
 // ============================================================
 
@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/context/AuthContext";
 import { Search, MapPin, Briefcase, DollarSign, Clock, ExternalLink, Filter, Loader2 } from "lucide-react";
+import API_BASE_URL from "@/config";
 
 const JobsPage = () => {
   const { user } = useAuth();
@@ -18,7 +19,7 @@ const JobsPage = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/jobs", {
+        const response = await fetch("${API_BASE_URL}/api/jobs", {
           headers: { Authorization: `Bearer ${user.token}` }
         });
         if (response.ok) {

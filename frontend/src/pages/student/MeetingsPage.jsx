@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/context/AuthContext";
 import { Calendar, Clock, MapPin, Users, Loader2, CheckCircle, Info, ExternalLink, XCircle } from "lucide-react";
+import API_BASE_URL from "@/config";
 
 const MeetingsPage = () => {
   const { user } = useAuth();
@@ -16,7 +17,7 @@ const MeetingsPage = () => {
   const fetchMeetings = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/meetings", {
+      const res = await fetch("${API_BASE_URL}/api/meetings", {
         headers: { Authorization: `Bearer ${user.token}` }
       });
       if (res.ok) {
@@ -33,7 +34,7 @@ const MeetingsPage = () => {
   const handleRegister = async (meetingId) => {
     try {
       setActionLoading(meetingId);
-      const res = await fetch(`http://localhost:5000/api/meetings/${meetingId}/register`, {
+      const res = await fetch(`${API_BASE_URL}/api/meetings/${meetingId}/register`, {
         method: "POST",
         headers: { Authorization: `Bearer ${user.token}` }
       });

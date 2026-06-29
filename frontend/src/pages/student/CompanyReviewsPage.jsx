@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+﻿import React, { useState, useEffect, useMemo } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { useAuth } from "@/context/AuthContext";
 import { Search, Building2, Users, TrendingUp, Star, ArrowRight, Download, FileText, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import API_BASE_URL from "@/config";
 
 const CompanyReviewsPage = () => {
     const { user } = useAuth();
@@ -19,9 +20,9 @@ const CompanyReviewsPage = () => {
         const fetchData = async () => {
             try {
                 const [alumniRes, reviewsRes, statsRes] = await Promise.all([
-                    fetch("http://localhost:5000/api/users/alumni", { headers: { Authorization: `Bearer ${user.token}` } }),
-                    fetch("http://localhost:5000/api/reviews", { headers: { Authorization: `Bearer ${user.token}` } }),
-                    fetch("http://localhost:5000/api/stats", { headers: { Authorization: `Bearer ${user.token}` } })
+                    fetch("${API_BASE_URL}/api/users/alumni", { headers: { Authorization: `Bearer ${user.token}` } }),
+                    fetch("${API_BASE_URL}/api/reviews", { headers: { Authorization: `Bearer ${user.token}` } }),
+                    fetch("${API_BASE_URL}/api/stats", { headers: { Authorization: `Bearer ${user.token}` } })
                 ]);
 
                 if (alumniRes.ok) setAlumni(await alumniRes.json());

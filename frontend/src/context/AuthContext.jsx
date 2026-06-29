@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import API_BASE_URL from "@/config";
 
 const AuthContext = createContext(null);
 
@@ -25,7 +26,7 @@ export const AuthProvider = ({ children }) => {
    * Login — validates against mock data (production: POST /api/auth/login)
    * Returns JWT in production; here we store user object
    */
-  const API_URL = "http://localhost:5000/api/auth";
+  const API_URL = `${API_BASE_URL}/api/auth`;
 
   const login = async (email, password) => {
     setIsLoading(true);

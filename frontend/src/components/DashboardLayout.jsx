@@ -7,6 +7,7 @@ import Sidebar from "./Sidebar";
 import { Bell, Search, Clock, CheckCircle, MessageSquare, Trash2, X } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Link } from "react-router-dom";
+import API_BASE_URL from "@/config";
 
 const DashboardLayout = ({ children, title, subtitle }) => {
   const { user } = useAuth();
@@ -16,7 +17,7 @@ const DashboardLayout = ({ children, title, subtitle }) => {
 
   const fetchNotifications = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/notifications", {
+      const response = await fetch(`${API_BASE_URL}/api/notifications`, {
         headers: { Authorization: `Bearer ${user.token}` }
       });
       const data = await response.json();
@@ -39,7 +40,7 @@ const DashboardLayout = ({ children, title, subtitle }) => {
 
   const markAsRead = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/notifications/mark-read/${id}`, {
+      await fetch(`${API_BASE_URL}/api/notifications/mark-read/${id}`, {
         method: "PUT",
         headers: { Authorization: `Bearer ${user.token}` }
       });
@@ -52,7 +53,7 @@ const DashboardLayout = ({ children, title, subtitle }) => {
 
   const markAllAsRead = async () => {
     try {
-      await fetch(`http://localhost:5000/api/notifications/mark-all-read`, {
+      await fetch(`${API_BASE_URL}/api/notifications/mark-all-read`, {
         method: "PUT",
         headers: { Authorization: `Bearer ${user.token}` }
       });

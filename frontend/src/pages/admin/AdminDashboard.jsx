@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/context/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Users, Briefcase, CheckCircle, XCircle, Shield, Loader2, AlertCircle, Calendar, ChevronDown, ChevronUp, Star, LayoutDashboard, TrendingUp } from "lucide-react";
+import API_BASE_URL from "@/config";
 
 /**
  * Admin Dashboard - Logic for real backend integration
@@ -44,7 +45,7 @@ const AdminDashboard = () => {
   // Fetch unverified alumni
   const fetchPendingAlumni = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/users/unverified-alumni", {
+      const response = await fetch("https://alumini-connect-bs23.onrender.com/api/users/unverified-alumni", {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -63,7 +64,7 @@ const AdminDashboard = () => {
   // Fetch all alumni (for stats/user list)
   const fetchAllAlumni = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/users/alumni", {
+      const response = await fetch("${API_BASE_URL}/api/users/alumni", {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -80,7 +81,7 @@ const AdminDashboard = () => {
   // Fetch all meetings
   const fetchAllMeetings = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/meetings", {
+      const response = await fetch("${API_BASE_URL}/api/meetings", {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       if (response.ok) setMeetings(await response.json());
@@ -90,9 +91,9 @@ const AdminDashboard = () => {
   const fetchJobsAndReviews = async () => {
     try {
       const [jobsRes, reviewsRes, statsRes] = await Promise.all([
-        fetch("http://localhost:5000/api/jobs", { headers: { Authorization: `Bearer ${user.token}` } }),
-        fetch("http://localhost:5000/api/reviews", { headers: { Authorization: `Bearer ${user.token}` } }),
-        fetch("http://localhost:5000/api/stats", { headers: { Authorization: `Bearer ${user.token}` } })
+        fetch("${API_BASE_URL}/api/jobs", { headers: { Authorization: `Bearer ${user.token}` } }),
+        fetch("${API_BASE_URL}/api/reviews", { headers: { Authorization: `Bearer ${user.token}` } }),
+        fetch("${API_BASE_URL}/api/stats", { headers: { Authorization: `Bearer ${user.token}` } })
       ]);
       if (jobsRes.ok) setJobs(await jobsRes.json());
       if (reviewsRes.ok) setReviews(await reviewsRes.json());
@@ -115,7 +116,7 @@ const AdminDashboard = () => {
 
   const handleVerify = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/users/verify-alumni/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/users/verify-alumni/${id}`, {
         method: "PUT",
         headers: { Authorization: `Bearer ${user.token}` },
       });
@@ -130,7 +131,7 @@ const AdminDashboard = () => {
 
   const updateReviewStatus = async (id, status) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/reviews/${id}/status`, {
+      const res = await fetch(`${API_BASE_URL}/api/reviews/${id}/status`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${user.token}` },
         body: JSON.stringify({ status })
@@ -144,7 +145,7 @@ const AdminDashboard = () => {
   const handleUpdateStats = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/stats", {
+      const res = await fetch("${API_BASE_URL}/api/stats", {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${user.token}` },
         body: JSON.stringify(statFormData)

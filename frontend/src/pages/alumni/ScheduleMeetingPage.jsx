@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/context/AuthContext";
 import { Calendar, Clock, MapPin, Users, FileText, CheckCircle, Loader2, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "@/config";
 
 const ScheduleMeetingPage = () => {
   const { user } = useAuth();
@@ -32,7 +33,7 @@ const ScheduleMeetingPage = () => {
       try {
         setFetchingMeetings(true);
         // 1. Fetch connected mentorships to get student count
-        const mentorshipsRes = await fetch("http://localhost:5000/api/mentorships/incoming-requests", {
+        const mentorshipsRes = await fetch("${API_BASE_URL}/api/mentorships/incoming-requests", {
           headers: { Authorization: `Bearer ${user.token}` }
         });
         
@@ -43,7 +44,7 @@ const ScheduleMeetingPage = () => {
         }
 
         // 2. Fetch existing meetings
-        const meetingsRes = await fetch("http://localhost:5000/api/meetings", {
+        const meetingsRes = await fetch("${API_BASE_URL}/api/meetings", {
           headers: { Authorization: `Bearer ${user.token}` }
         });
         
@@ -73,7 +74,7 @@ const ScheduleMeetingPage = () => {
     setSuccess(false);
 
     try {
-      const response = await fetch("http://localhost:5000/api/meetings", {
+      const response = await fetch("${API_BASE_URL}/api/meetings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/context/AuthContext";
 import { getPlacementInsights } from "@/utils/aiRecommendation";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Cell, PieChart, Pie, AreaChart, Area } from "recharts";
 import { TrendingUp, Award, Building2, Cpu, Loader2 } from "lucide-react";
+import API_BASE_URL from "@/config";
 
 const COLORS = ["hsl(204,70%,53%)", "hsl(145,63%,42%)", "hsl(38,92%,50%)", "hsl(280,60%,55%)", "hsl(0,72%,51%)"];
 
@@ -17,8 +18,8 @@ const PlacementInsightsPage = () => {
     const fetchStats = async () => {
       try {
         const [alumniRes, statsRes] = await Promise.all([
-          fetch("http://localhost:5000/api/users/alumni", { headers: { Authorization: `Bearer ${user.token}` } }),
-          fetch("http://localhost:5000/api/stats", { headers: { Authorization: `Bearer ${user.token}` } })
+          fetch("${API_BASE_URL}/api/users/alumni", { headers: { Authorization: `Bearer ${user.token}` } }),
+          fetch("${API_BASE_URL}/api/stats", { headers: { Authorization: `Bearer ${user.token}` } })
         ]);
 
         if (alumniRes.ok && statsRes.ok) {

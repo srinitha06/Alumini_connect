@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/context/AuthContext";
 import {
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import ChatModal from "@/components/ChatModal";
+import API_BASE_URL from "@/config";
 
 const MyMentorshipsPage = () => {
     const { user } = useAuth();
@@ -18,7 +19,7 @@ const MyMentorshipsPage = () => {
 
     const fetchMyRequests = async () => {
         try {
-            const response = await fetch("http://localhost:5000/api/mentorships/my-requests", {
+            const response = await fetch("${API_BASE_URL}/api/mentorships/my-requests", {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await response.json();

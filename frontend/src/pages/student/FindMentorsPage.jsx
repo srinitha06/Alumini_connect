@@ -1,4 +1,4 @@
-// ============================================================
+﻿// ============================================================
 // FIND MENTORS PAGE — AI-powered mentor search & recommendation
 // ============================================================
 
@@ -7,6 +7,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { useAuth } from "@/context/AuthContext";
 import { getTopMentors } from "@/utils/aiRecommendation";
 import {
+import API_BASE_URL from "@/config";
   Zap, Search, MessageSquare, CheckCircle, Clock,
   MapPin, Briefcase, Send, X, Award, Users, Loader2, Building2,
   Sparkles, Rocket
@@ -26,7 +27,7 @@ const FindMentorsPage = () => {
 
   const fetchAlumni = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/users/alumni", {
+      const response = await fetch("${API_BASE_URL}/api/users/alumni", {
         headers: { Authorization: `Bearer ${user.token}` }
       });
       const data = await response.json();
@@ -38,7 +39,7 @@ const FindMentorsPage = () => {
 
   const fetchRequests = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/mentorships/my-requests", {
+      const response = await fetch("${API_BASE_URL}/api/mentorships/my-requests", {
         headers: { Authorization: `Bearer ${user.token}` }
       });
       const data = await response.json();
@@ -78,7 +79,7 @@ const FindMentorsPage = () => {
   const handleSendRequest = async (alumniId) => {
     if (!message.trim()) return;
     try {
-      const response = await fetch("http://localhost:5000/api/mentorships/request", {
+      const response = await fetch("${API_BASE_URL}/api/mentorships/request", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

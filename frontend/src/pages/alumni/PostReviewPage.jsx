@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,6 +9,7 @@ import { Star, MessageSquare, Building2, Calendar, User, Save, Send, XCircle } f
 import { useToast } from "@/components/ui/use-toast";
 
 import { useAuth } from "@/context/AuthContext";
+import API_BASE_URL from "@/config";
 
 const PostReviewPage = () => {
     const { user } = useAuth();
@@ -37,7 +38,7 @@ const PostReviewPage = () => {
                 ...formData,
                 rating: parseInt(formData.rating, 10)
             };
-            const response = await fetch("http://localhost:5000/api/reviews", {
+            const response = await fetch("${API_BASE_URL}/api/reviews", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
